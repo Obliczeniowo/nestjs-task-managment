@@ -1,5 +1,5 @@
 import { CreateTaskDto } from './dto/create-task.dto';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Param } from '@nestjs/common';
 import { Task, TaskStatus } from './task.model';
 import { v4 as uuid } from 'uuid';
 
@@ -25,5 +25,9 @@ export class TasksService {
     this.tasks.push(task);
 
     return task;
+  }
+
+  delete(id: string) {
+    this.tasks = this.tasks.filter(task => task.id !== id);
   }
 }
