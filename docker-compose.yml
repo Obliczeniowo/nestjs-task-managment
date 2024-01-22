@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: krzysztof
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 10001:8080
