@@ -1,5 +1,5 @@
 import { CreateTaskDto } from './dto/create-task.dto';
-import { Injectable, Param } from '@nestjs/common';
+import { Injectable, NotFoundException, Param } from '@nestjs/common';
 import { Task, TaskStatus } from './task.model';
 import { v4 as uuid } from 'uuid';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
@@ -30,7 +30,11 @@ export class TasksService {
   }
 
   get(id: string): Task {
-    return this.tasks.find(task => task.id === id);
+    const task = this.tasks.find(task => task.id === id);
+    if (task) {
+      return task;
+    }
+    throw new NotFoundException(`Zadanie z id: ${id} nie zostało odnalezione`);
   }
 
   create(createTaskDto: CreateTaskDto): Task {
@@ -45,17 +49,15 @@ export class TasksService {
     return task;
   }
 
-  updateStatus(id: string, status: TaskStatus): Task | false {
+  updateStatus(id: string, status: TaskStatus): Task {
     const found = this.get(id);
 
-    if (found) {
-      found.status = status;
-    }
-
-    return found || false;
+    found.status = status;
+    return found;
   }
 
   delete(id: string) {
+    this.get(id);
     this.tasks = this.tasks.filter(task => task.id !== id);
   }
 }

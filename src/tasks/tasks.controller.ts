@@ -1,5 +1,5 @@
 import { CreateTaskDto } from './dto/create-task.dto';
-import { Body, Controller, Delete, Get, Options, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Options, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task, TaskStatus } from './task.model';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
@@ -38,8 +38,14 @@ export class TasksController {
   updateStatus(
     @Param('id') id: string,
     @Body('status') status: TaskStatus
-  ): Task | false {
-    return this.tasksService.updateStatus(id, status);
+  ): Task {
+    const task = this.tasksService.updateStatus(id, status);
+
+    if (task) {
+      return task;
+    }
+
+    throw new NotFoundException(`Zadanie z id: ${id} nie zostało odnalezione`);
   }
 
   @Delete('/:id')
