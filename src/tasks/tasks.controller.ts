@@ -1,5 +1,6 @@
 import { Controller, Get, Options } from '@nestjs/common';
 import { TasksService } from './tasks.service';
+import { Task } from './task.model';
 
 @Controller('tasks')
 export class TasksController {
@@ -11,7 +12,7 @@ export class TasksController {
   }
 
   @Get()
-  getAllTasks() {
+  getAllTasks(): Task[] {
     return this.tasksService.getAllTasks();
   }
 }
