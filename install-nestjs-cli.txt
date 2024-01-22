@@ -1,0 +1,3 @@
+yarn global add @nestjs/cli
+npm i -g nestjs/cli
+nest new nestjs-task-managment
