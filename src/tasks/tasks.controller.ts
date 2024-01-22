@@ -3,6 +3,7 @@ import { Body, Controller, Delete, Get, NotFoundException, Options, Param, Patch
 import { TasksService } from './tasks.service';
 import { Task, TaskStatus } from './task.model';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
+import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -36,16 +37,10 @@ export class TasksController {
 
   @Patch('/:id/status')
   updateStatus(
-    @Param('id') id: string,
-    @Body('status') status: TaskStatus
+    @Param() id: string,
+    @Body() update: UpdateTaskStatusDto
   ): Task {
-    const task = this.tasksService.updateStatus(id, status);
-
-    if (task) {
-      return task;
-    }
-
-    throw new NotFoundException(`Zadanie z id: ${id} nie zostało odnalezione`);
+    return this.tasksService.updateStatus(id, update.status);
   }
 
   @Delete('/:id')
