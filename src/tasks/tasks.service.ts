@@ -7,12 +7,16 @@ import { v4 as uuid } from 'uuid';
 export class TasksService {
   private tasks: Task[] = [];
 
-  getAllTasks(): Task[] {
+  getAll(): Task[] {
     return this.tasks;
   }
 
-  createTask(createTaskDto: CreateTaskDto): Task {
-    const task =  {
+  get(id: string): Task {
+    return this.tasks.find(task => task.id === id);
+  }
+
+  create(createTaskDto: CreateTaskDto): Task {
+    const task = {
       ...createTaskDto,
       id: uuid(),
       status: TaskStatus.OPEN
