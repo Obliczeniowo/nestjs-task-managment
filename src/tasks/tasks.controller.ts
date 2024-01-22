@@ -1,7 +1,8 @@
 import { CreateTaskDto } from './dto/create-task.dto';
-import { Body, Controller, Delete, Get, Options, Param, Patch, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Options, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task, TaskStatus } from './task.model';
+import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -13,7 +14,11 @@ export class TasksController {
   }
 
   @Get()
-  getAll(): Task[] {
+  getAll(@Query() filterDto: GetTaskFilterDto): Task[] {
+    if (Object.keys(filterDto).length) {
+      return this.tasksService.getFiltered(filterDto);
+    }
+
     return this.tasksService.getAll();
   }
 
@@ -31,7 +36,7 @@ export class TasksController {
 
   @Patch('/:id/status')
   updateStatus(
-    @Param('id') id: string, 
+    @Param('id') id: string,
     @Body('status') status: TaskStatus
   ): Task | false {
     return this.tasksService.updateStatus(id, status);
