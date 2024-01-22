@@ -1,8 +1,8 @@
 {
   "name": "nestjs-task-managment",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Course",
+  "author": "Krzysztof Zajączkowski",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
