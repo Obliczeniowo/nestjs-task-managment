@@ -17,5 +17,5 @@ export class Task {
   status: TaskStatus
 
   @ManyToOne(_ => User, (task: { tasks }) => task.tasks, { eager: false })
-  user: User[];
+  user: User;
 }
