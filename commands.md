@@ -13,7 +13,7 @@ gcrypt
   npm i gcrypt
 
 jst
-  npm i @nestjs/jwt @nestjs/passport passport passport-jwt
+  npm i @nestjs/jwt @nestjs/passport passport passport-jwt @types/passport-jwt
 
 # to generate
 
