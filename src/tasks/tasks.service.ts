@@ -1,13 +1,10 @@
 import { CreateTaskDto } from './dto/create-task.dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { TaskStatus } from './task.enum';
-import { v4 as uuid } from 'uuid';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
 import { Task } from './tasks.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { AppDataSource } from 'src/data-source';
 import { TasksRepository } from './tasks.repository';
-import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
+import { User } from 'src/auth/user.entity';
 
 
 @Injectable()
@@ -29,8 +26,8 @@ export class TasksService {
     throw new NotFoundException();
   }
 
-  create(createTaskDto: CreateTaskDto): Promise<Task> {
-    return this.repository.add(createTaskDto);
+  create(createTaskDto: CreateTaskDto, user: User): Promise<Task> {
+    return this.repository.add(createTaskDto, user);
   }
 
   async updateStatus(id: string, status: TaskStatus): Promise<Task> {
