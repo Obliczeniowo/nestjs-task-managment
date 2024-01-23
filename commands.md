@@ -9,6 +9,12 @@ nest new project-name
 typeorm and pg
   npm i typeorm @nestjs/typeorm pg
 
+gcrypt
+  npm i gcrypt
+
+jst
+  npm i @nestjs/jwt @nestjs/passport passport passport-jwt
+
 # to generate
 
 nest g module name
