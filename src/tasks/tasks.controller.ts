@@ -3,6 +3,7 @@ import { Body, Controller, Delete, Get, Options, Param, Patch, Post, Query } fro
 import { TasksService } from './tasks.service';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
+import { Task } from './tasks.entity';
 
 @Controller('tasks')
 export class TasksController {
@@ -22,10 +23,10 @@ export class TasksController {
   //   return this.tasksService.getAll();
   // }
 
-  // @Get('/:id')
-  // get(@Param('id') id: string): Task {
-  //   return this.tasksService.get(id);
-  // }
+  @Get('/:id')
+  async get(@Param('id') id: string): Promise<Task> {
+    return this.tasksService.get(id);
+  }
 
   // @Post()
   // create(
