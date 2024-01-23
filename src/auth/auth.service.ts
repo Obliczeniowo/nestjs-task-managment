@@ -1,8 +1,9 @@
 import { User } from './user.entity';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UsersRepository } from './users.repository';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
-
+import * as bcrypt from 'bcrypt';
+import { LoginCredentialsDto } from './dto/login-credentiols.dto';
 @Injectable()
 export class AuthService {
   constructor(private repository: UsersRepository) {
@@ -20,6 +21,18 @@ export class AuthService {
     }
 
     throw new NotFoundException();
+  }
+
+  async signIn(credentials: LoginCredentialsDto): Promise<string> {
+    const { username, password } = credentials;
+
+    const user = await this.repository.findOneBy({ username });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      return 'success';
+    } else {
+      throw new UnauthorizedException('Próba nieautoryzowanego dostępu')
+    }
   }
 
   async getAll(): Promise<User[]> {
