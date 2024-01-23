@@ -4,7 +4,7 @@ import { DataSource, Repository } from 'typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 
 @Injectable()
-export class AuthRepository extends Repository<User> {
+export class UsersRepository extends Repository<User> {
   constructor(private dataSource: DataSource) {
     super(User, dataSource.createEntityManager());
   }
