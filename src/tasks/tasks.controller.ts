@@ -14,14 +14,10 @@ export class TasksController {
     return;
   }
 
-  // @Get()
-  // getAll(@Query() filterDto: GetTaskFilterDto): Task[] {
-  //   if (Object.keys(filterDto).length) {
-  //     return this.tasksService.getFiltered(filterDto);
-  //   }
-
-  //   return this.tasksService.getAll();
-  // }
+  @Get()
+  getAll(@Query() filterDto: GetTaskFilterDto): Promise<Task[]> {
+    return this.tasksService.getAll(filterDto)
+  }
 
   @Get('/:id')
   async get(@Param('id') id: string): Promise<Task> {

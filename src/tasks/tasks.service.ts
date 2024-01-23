@@ -14,26 +14,9 @@ import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 export class TasksService {
   constructor(private repository: TasksRepository) { }
 
-  async getAll(): Promise<Task[]> {
-    return await this.repository.find();
+  getAll(filters: GetTaskFilterDto): Promise<Task[]> {
+    return this.repository.getAll(filters);
   }
-
-  // async getFiltered(filters: GetTaskFilterDto): Promise<Task[]> {
-  //   const { status, search } = filters;
-
-  //   let tasks = this.getAll();
-
-  //   if (status) {
-  //     tasks = tasks.filter(task => task.status === status);
-  //     console.log(tasks);
-  //   }
-
-  //   if (search) {
-  //     tasks = tasks.filter(task => ['description', 'title'].find(key => task[key].toLowerCase().includes(search)));
-  //   }
-
-  //   return tasks;
-  // }
 
   async get(id: string): Promise<Task> {
     // await this.repository.findOne({ where: { id: id } }); // alternative
