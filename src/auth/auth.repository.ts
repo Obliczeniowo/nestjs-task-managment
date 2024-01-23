@@ -16,9 +16,10 @@ export class AuthRepository extends Repository<User> {
     } catch (error) {
       let exception;
       switch (error.code) {
-        case 23505: {
-          exception =  new ConflictException('Nazwa użytkownika istnieje')
+        case '23505': {
+          exception = new ConflictException('Nazwa użytkownika istnieje')
         }
+          break;
         default: {
           exception = new InternalServerErrorException();
         }
