@@ -6,58 +6,57 @@ import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
 
 @Injectable()
 export class TasksService {
-  private tasks: Task[] = [];
 
-  getAll(): Task[] {
-    return this.tasks;
-  }
+  // getAll(): Task[] {
+  //   return this.tasks;
+  // }
 
-  getFiltered(filters: GetTaskFilterDto): Task[] {
-    const { status, search } = filters;
+  // getFiltered(filters: GetTaskFilterDto): Task[] {
+  //   const { status, search } = filters;
 
-    let tasks = this.getAll();
+  //   let tasks = this.getAll();
 
-    if (status) {
-      tasks = tasks.filter(task => task.status === status);
-      console.log(tasks);
-    }
+  //   if (status) {
+  //     tasks = tasks.filter(task => task.status === status);
+  //     console.log(tasks);
+  //   }
 
-    if (search) {
-      tasks = tasks.filter(task => ['description', 'title'].find(key => task[key].toLowerCase().includes(search)));
-    }
+  //   if (search) {
+  //     tasks = tasks.filter(task => ['description', 'title'].find(key => task[key].toLowerCase().includes(search)));
+  //   }
 
-    return tasks;
-  }
+  //   return tasks;
+  // }
 
-  get(id: string): Task {
-    const task = this.tasks.find(task => task.id === id);
-    if (task) {
-      return task;
-    }
-    throw new NotFoundException(`Zadanie z id: ${id} nie zostało odnalezione`);
-  }
+  // get(id: string): Task {
+  //   const task = this.tasks.find(task => task.id === id);
+  //   if (task) {
+  //     return task;
+  //   }
+  //   throw new NotFoundException(`Zadanie z id: ${id} nie zostało odnalezione`);
+  // }
 
-  create(createTaskDto: CreateTaskDto): Task {
-    const task = {
-      ...createTaskDto,
-      id: uuid(),
-      status: TaskStatus.OPEN
-    }
+  // create(createTaskDto: CreateTaskDto): Task {
+  //   const task = {
+  //     ...createTaskDto,
+  //     id: uuid(),
+  //     status: TaskStatus.OPEN
+  //   }
 
-    this.tasks.push(task);
+  //   this.tasks.push(task);
 
-    return task;
-  }
+  //   return task;
+  // }
 
-  updateStatus(id: string, status: TaskStatus): Task {
-    const found = this.get(id);
+  // updateStatus(id: string, status: TaskStatus): Task {
+  //   const found = this.get(id);
 
-    found.status = status;
-    return found;
-  }
+  //   found.status = status;
+  //   return found;
+  // }
 
-  delete(id: string) {
-    this.get(id);
-    this.tasks = this.tasks.filter(task => task.id !== id);
-  }
+  // delete(id: string) {
+  //   this.get(id);
+  //   this.tasks = this.tasks.filter(task => task.id !== id);
+  // }
 }

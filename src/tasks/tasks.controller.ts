@@ -14,38 +14,38 @@ export class TasksController {
     return;
   }
 
-  @Get()
-  getAll(@Query() filterDto: GetTaskFilterDto): Task[] {
-    if (Object.keys(filterDto).length) {
-      return this.tasksService.getFiltered(filterDto);
-    }
+  // @Get()
+  // getAll(@Query() filterDto: GetTaskFilterDto): Task[] {
+  //   if (Object.keys(filterDto).length) {
+  //     return this.tasksService.getFiltered(filterDto);
+  //   }
 
-    return this.tasksService.getAll();
-  }
+  //   return this.tasksService.getAll();
+  // }
 
-  @Get('/:id')
-  get(@Param('id') id: string): Task {
-    return this.tasksService.get(id);
-  }
+  // @Get('/:id')
+  // get(@Param('id') id: string): Task {
+  //   return this.tasksService.get(id);
+  // }
 
-  @Post()
-  create(
-    @Body() dto: CreateTaskDto
-  ): Task {
-    return this.tasksService.create(dto);
-  }
+  // @Post()
+  // create(
+  //   @Body() dto: CreateTaskDto
+  // ): Task {
+  //   return this.tasksService.create(dto);
+  // }
 
-  @Patch('/:id/status')
-  updateStatus(
-    @Param() id: string,
-    @Body() update: UpdateTaskStatusDto
-  ): Task {
-    return this.tasksService.updateStatus(id, update.status);
-  }
+  // @Patch('/:id/status')
+  // updateStatus(
+  //   @Param() id: string,
+  //   @Body() update: UpdateTaskStatusDto
+  // ): Task {
+  //   return this.tasksService.updateStatus(id, update.status);
+  // }
 
-  @Delete('/:id')
-  delete(@Param('id') id: string): void {
-    this.tasksService.delete(id);
-  }
+  // @Delete('/:id')
+  // delete(@Param('id') id: string): void {
+  //   this.tasksService.delete(id);
+  // }
 
 }
