@@ -7,17 +7,18 @@ import { Task } from './tasks.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AppDataSource } from 'src/data-source';
 import { TasksRepository } from './tasks.repository';
+import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 
 
 @Injectable()
 export class TasksService {
   constructor(private repository: TasksRepository) { }
 
-  // getAll(): Task[] {
-  //   return this.tasks;
-  // }
+  async getAll(): Promise<Task[]> {
+    return await this.repository.find();
+  }
 
-  // getFiltered(filters: GetTaskFilterDto): Task[] {
+  // async getFiltered(filters: GetTaskFilterDto): Promise<Task[]> {
   //   const { status, search } = filters;
 
   //   let tasks = this.getAll();
@@ -45,13 +46,8 @@ export class TasksService {
     throw new NotFoundException();
   }
 
-  async create(createTaskDto: CreateTaskDto): Promise<Task> {
-    const task = this.repository.create({
-      ...createTaskDto,
-      status: TaskStatus.OPEN,
-    });
-    await this.repository.save(task);
-    return task;
+  create(createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.repository.add(createTaskDto);
   }
 
   async updateStatus(id: string, status: TaskStatus): Promise<Task> {
@@ -65,7 +61,10 @@ export class TasksService {
   }
 
   async delete(id: string) {
-    await this.get(id);
-    return await this.repository.delete(id);
+    const result = await this.repository.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException();
+    }
   }
 }
