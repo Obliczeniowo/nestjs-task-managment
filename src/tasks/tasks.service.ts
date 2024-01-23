@@ -11,7 +11,7 @@ import { TasksRepository } from './tasks.repository';
 
 @Injectable()
 export class TasksService {
-  constructor(private taskEntityRepository: TasksRepository) {}
+  constructor(private repository: TasksRepository) { }
 
   // getAll(): Task[] {
   //   return this.tasks;
@@ -35,7 +35,8 @@ export class TasksService {
   // }
 
   async get(id: string): Promise<Task> {
-    const found = await this.taskEntityRepository.findOneBy({ id });
+    // await this.repository.findOne({ where: { id: id } }); // alternative
+    const found = await this.repository.findOneBy({ id });
 
     if (found) {
       return found;
@@ -44,27 +45,27 @@ export class TasksService {
     throw new NotFoundException();
   }
 
-  // create(createTaskDto: CreateTaskDto): Task {
-  //   const task = {
-  //     ...createTaskDto,
-  //     id: uuid(),
-  //     status: TaskStatus.OPEN
-  //   }
+  async create(createTaskDto: CreateTaskDto): Promise<Task> {
+    const task = this.repository.create({
+      ...createTaskDto,
+      status: TaskStatus.OPEN,
+    });
+    await this.repository.save(task);
+    return task;
+  }
 
-  //   this.tasks.push(task);
+  async updateStatus(id: string, status: TaskStatus): Promise<Task> {
+    const found = await this.get(id);
 
-  //   return task;
-  // }
+    found.status = status;
 
-  // updateStatus(id: string, status: TaskStatus): Task {
-  //   const found = this.get(id);
+    await this.repository.update(id, found);
 
-  //   found.status = status;
-  //   return found;
-  // }
+    return found;
+  }
 
-  // delete(id: string) {
-  //   this.get(id);
-  //   this.tasks = this.tasks.filter(task => task.id !== id);
-  // }
+  async delete(id: string) {
+    await this.get(id);
+    return await this.repository.delete(id);
+  }
 }

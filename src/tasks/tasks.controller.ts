@@ -28,24 +28,24 @@ export class TasksController {
     return this.tasksService.get(id);
   }
 
-  // @Post()
-  // create(
-  //   @Body() dto: CreateTaskDto
-  // ): Task {
-  //   return this.tasksService.create(dto);
-  // }
+  @Post()
+  async create(
+    @Body() dto: CreateTaskDto
+  ): Promise<Task> {
+    return await this.tasksService.create(dto);
+  }
 
-  // @Patch('/:id/status')
-  // updateStatus(
-  //   @Param() id: string,
-  //   @Body() update: UpdateTaskStatusDto
-  // ): Task {
-  //   return this.tasksService.updateStatus(id, update.status);
-  // }
+  @Patch('/:id/status')
+  async updateStatus(
+    @Param('id') id: string,
+    @Body() update: UpdateTaskStatusDto
+  ): Promise<Task> {
+    return this.tasksService.updateStatus(id, update.status);
+  }
 
-  // @Delete('/:id')
-  // delete(@Param('id') id: string): void {
-  //   this.tasksService.delete(id);
-  // }
+  @Delete('/:id')
+  async delete(@Param('id') id: string) {
+    this.tasksService.delete(id);
+  }
 
 }
