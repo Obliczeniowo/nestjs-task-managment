@@ -15,6 +15,9 @@ gcrypt
 jst
   npm i @nestjs/jwt @nestjs/passport passport passport-jwt @types/passport-jwt
 
+config
+  npm i @nestjs/config
+
 # to generate
 
 nest g module name
@@ -24,6 +27,10 @@ nest g service name
 # pgadmin install
 
 https://www.postgresql.org/ftp/pgadmin/pgadmin4/v8.2/windows/
+
+# cross-env
+
+npm install -g cross-env
 
 # TypeOrm documentation
 
