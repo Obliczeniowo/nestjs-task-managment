@@ -5,6 +5,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './task.enum';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
 import { User } from 'src/auth/user.entity';
+import { json } from 'stream/consumers';
 
 @Injectable()
 export class TasksRepository extends Repository<Task> {
@@ -43,10 +44,10 @@ export class TasksRepository extends Repository<Task> {
 
     try {
       const tasks: Task[] = await query.getMany();
+      return tasks; 
     } catch (error) {
-      this.logger
+      this.logger.error(`${JSON.stringify(error)}`, error.stack)
     }
 
-    return tasks;
   }
 }
