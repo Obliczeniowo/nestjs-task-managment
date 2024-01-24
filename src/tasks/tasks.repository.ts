@@ -1,6 +1,6 @@
 import { DataSource, Repository } from 'typeorm';
 import { Task } from './tasks.entity';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './task.enum';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
@@ -8,6 +8,8 @@ import { User } from 'src/auth/user.entity';
 
 @Injectable()
 export class TasksRepository extends Repository<Task> {
+  logger: Logger = new Logger('TasksRepository');
+
   constructor(private dataSource: DataSource) {
     super(Task, dataSource.createEntityManager());
   }
@@ -39,7 +41,11 @@ export class TasksRepository extends Repository<Task> {
       );
     }
 
-    const tasks: Task[] = await query.getMany();
+    try {
+      const tasks: Task[] = await query.getMany();
+    } catch (error) {
+      this.logger
+    }
 
     return tasks;
   }
