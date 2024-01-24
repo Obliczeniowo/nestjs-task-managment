@@ -15,6 +15,9 @@ gcrypt
 jst
   npm i @nestjs/jwt @nestjs/passport passport passport-jwt @types/passport-jwt
 
+config
+  npm i @nestjs/config
+
 # to generate
 
 nest g module name
