@@ -25,6 +25,10 @@ nest g service name
 
 https://www.postgresql.org/ftp/pgadmin/pgadmin4/v8.2/windows/
 
+# cross-env
+
+npm install -g cross-env
+
 # TypeOrm documentation
 
 https://typeorm.io
