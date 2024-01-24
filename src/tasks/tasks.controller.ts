@@ -12,7 +12,7 @@ import { Logger } from '@nestjs/common';
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
-  private logger = new Logger('TasksController');
+  private logger = new Logger('TasksController', { timestamp: true });
   constructor(private tasksService: TasksService) { }
 
   @Options()
