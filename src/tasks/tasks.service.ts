@@ -5,11 +5,13 @@ import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
 import { Task } from './tasks.entity';
 import { TasksRepository } from './tasks.repository';
 import { User } from 'src/auth/user.entity';
+import { ConfigService } from '@nestjs/config';
 
 
 @Injectable()
 export class TasksService {
-  constructor(private repository: TasksRepository) { }
+  constructor(private repository: TasksRepository) {
+  }
 
   getAll(filters: GetTaskFilterDto, user: User): Promise<Task[]> {
     return this.repository.getAll(filters, user);
