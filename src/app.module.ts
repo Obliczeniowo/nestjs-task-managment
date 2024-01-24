@@ -15,6 +15,7 @@ import { UploadModule } from './upload/upload.module';
     }),
     TasksModule,
     AuthModule,
+    UploadModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -31,7 +32,6 @@ import { UploadModule } from './upload/upload.module';
         }
       }
     }),
-    UploadModule,
   ],
 })
 export class AppModule { }
