@@ -19,9 +19,7 @@ config
   npm i @nestjs/config
 
 install joi
-  npm i @hapi/joi
-
-
+  npm i @hapi/joi @types/hapi__joi
 
 # to generate
 
