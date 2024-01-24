@@ -18,6 +18,9 @@ jst
 config
   npm i @nestjs/config
 
+install joi
+  npm i @hapi/joi @types/hapi__joi
+
 # to generate
 
 nest g module name
