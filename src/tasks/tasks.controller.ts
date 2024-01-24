@@ -27,8 +27,11 @@ export class TasksController {
   }
 
   @Get('/:id')
-  async get(@Param('id') id: string): Promise<Task> {
-    return this.tasksService.get(id);
+  async get(
+    @Param('id') id: string,
+    @GetUser() user: User
+  ): Promise<Task> {
+    return this.tasksService.get(id, user);
   }
 
   @Post()
@@ -42,14 +45,18 @@ export class TasksController {
   @Patch('/:id/status')
   async updateStatus(
     @Param('id') id: string,
-    @Body() update: UpdateTaskStatusDto
+    @Body() update: UpdateTaskStatusDto,
+    @GetUser() user: User
   ): Promise<Task> {
-    return this.tasksService.updateStatus(id, update.status);
+    return this.tasksService.updateStatus(id, update.status, user);
   }
 
   @Delete('/:id')
-  async delete(@Param('id') id: string) {
-    await this.tasksService.delete(id);
+  async delete(
+    @Param('id') id: string,
+    @GetUser() user: User
+  ) {
+    await this.tasksService.delete(id, user);
   }
 
 }
