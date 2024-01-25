@@ -5,7 +5,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './tasks.entity';
 import { TasksRepository } from './tasks.repository';
 import { AuthModule } from 'src/auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
