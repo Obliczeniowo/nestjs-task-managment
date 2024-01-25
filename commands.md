@@ -21,6 +21,10 @@ config
 install joi
   npm i @hapi/joi @types/hapi__joi
 
+for file upload
+  npm install @nestjs/platform-express multer
+  npm i -D @types/multer
+
 # to generate
 
 nest g module name
