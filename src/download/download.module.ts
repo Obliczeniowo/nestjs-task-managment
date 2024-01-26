@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { DownloadController } from './download/download.controller';
 
-@Module({})
+@Module({
+  controllers: [DownloadController]
+})
 export class DownloadModule {}
