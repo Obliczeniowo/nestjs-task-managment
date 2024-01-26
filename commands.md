@@ -25,6 +25,9 @@ for file upload
   npm install @nestjs/platform-express multer
   npm i -D @types/multer
 
+WebSockets
+  npm i --save @nestjs/websockets @nestjs/platform-socket.io
+
 # to generate
 
 nest g module name
