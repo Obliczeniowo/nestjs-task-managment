@@ -12,7 +12,8 @@ export class UploadController {
         new FileTypeValidator({ fileType: 'application/octet-stream' }),
       ],
     })
-  ) file: Array<Express.Multer.File>): void {
+  ) file: Array<Express.Multer.File>): string {
     console.log(file);
+    return 'File uploaded';
   }
 }
