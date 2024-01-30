@@ -28,6 +28,9 @@ for file upload
 WebSockets
   npm i --save @nestjs/websockets @nestjs/platform-socket.io
 
+swagger
+  npm install --save @nestjs/swagger
+
 # to generate
 
 nest g module name
