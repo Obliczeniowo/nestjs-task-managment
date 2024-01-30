@@ -10,13 +10,14 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule, { cors: true });
 
+  app.setGlobalPrefix('api');
+
   const config = new DocumentBuilder()
     .setTitle('Swagger')
     .setDescription('Nest js task manager')
     .setVersion('1.0')
     .addTag('Task manager')
     .build();
-
 
   const options: SwaggerDocumentOptions = {
     operationIdFactory: (
